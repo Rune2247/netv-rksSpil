@@ -9,6 +9,7 @@ public class ServerReciveThread extends Thread {
 	String modifiedSentence;
 	BufferedReader inFromClient;
 	Socket clientSocket;
+	private boolean luk = true;
 
 	public ServerReciveThread(BufferedReader inFromClient, Socket clientSocket) {
 		this.inFromClient = inFromClient;
@@ -18,19 +19,27 @@ public class ServerReciveThread extends Thread {
 
 	@Override
 	public void run() {
-		while (clientSocket.isConnected()) {
-			try {
-				modifiedSentence = inFromClient.readLine();
-				System.out.println(modifiedSentence);
+		while (luk) {
+			modtag();
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
+
 	}
 
 	private void modtag() {
 		// Modtag besked
 
+		try {
+			modifiedSentence = inFromClient.readLine();
+			if (modifiedSentence == null) {
+				luk = false;
+				System.out.println("FUUUCk");
+			} else {
+				System.out.println(modifiedSentence);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

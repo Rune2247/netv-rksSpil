@@ -1,8 +1,6 @@
 package game;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
@@ -16,30 +14,29 @@ public class Server {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws Exception {
 
-		ArrayList<OutputStream> outPutStreamList = new ArrayList<OutputStream>();
+	private static ArrayList<OutputStream> outPutStreamList = new ArrayList<OutputStream>();
+	private GameState gameState = new GameState("Vi tester");
+
+	public static void main(String[] args) throws Exception {
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
-		while(true) {
+		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
 			outPutStreamList.add(connectionSocket.getOutputStream());
-			
+
 			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
-			
+
 			serverRecive.start();
-			
+
 		}
-		
-		
-		
 
-		
+	}
 
-		
-		
+	public void sendGameState() {
+
 	}
 
 	public static List<Player> players = new ArrayList<Player>();
