@@ -1,10 +1,13 @@
 package game;
 
 public class GameState {
-	private String test = "Test";
+	// GameState Format
+	// Score - Int - viser teamets samlet score
+	// Tasks - ArrayList Af frugt
+	// PlayerData - ArrayList Af player objektter
 
-	public GameState(String test) {
-		this.test = test;
+	public GameState() {
+
 	}
 
 }
