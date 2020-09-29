@@ -11,9 +11,9 @@ public class ClientRecieveThread extends Thread {
 	private BufferedReader inFromServer;
 	private Player player;
 	
-	public ClientRecieveThread(Socket theSocket, BufferedReader inFromUser, Player player) {
+	public ClientRecieveThread(Socket theSocket, BufferedReader inFromServer, Player player) {
 		this.theSocket = theSocket;
-		this.inFromServer = inFromUser;
+		this.inFromServer = inFromServer;
 		this.player = player;
 	}
 	
@@ -26,6 +26,7 @@ public class ClientRecieveThread extends Thread {
 	public void recieveData() {
 		try {
 			String recived = inFromServer.readLine();
+			System.out.println(recived);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
