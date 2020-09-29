@@ -1,4 +1,4 @@
-package netværksspil;
+package netvÃ¦rksspil;
 
 public class main {
 
