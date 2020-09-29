@@ -16,9 +16,13 @@ public class Server {
 	 */
 	public static void main(String[] args) throws Exception {
 
+		ArrayList<Socket> socketList = new ArrayList<Socket>();
+
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
 		Socket connectionSocket = welcomeSocket.accept();
+
+		socketList.add(connectionSocket);
 		BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 		// DataOutputStream outToClient = new
 		// DataOutputStream(connectionSocket.getOutputStream());
