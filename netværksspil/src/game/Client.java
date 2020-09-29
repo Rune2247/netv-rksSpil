@@ -12,14 +12,15 @@ public class Client {
 		// TODO Auto-generated method stub
 		
 		//Making a connection
-		Socket clientSocket= new Socket("localhost",12345);
+		Socket clientSocket= new Socket("10.24.3.83",12345);
 				
 		//Stuff used to send messages
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		//BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		
 		outToServer.writeBytes("Hej Rune" + '\n');
-		outToServer.writeBytes("Nisser" + '\n');
+		Thread.sleep(100000);
+		
 		clientSocket.close();
 	}
 	
