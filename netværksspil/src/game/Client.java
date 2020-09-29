@@ -11,7 +11,7 @@ public class Client {
 		// TODO Auto-generated method stub
 
 		// Making a connection
-		Socket clientSocket = new Socket("10.24.67.112", 12345);
+		Socket clientSocket = new Socket("10.24.3.83", 12345);
 
 		// Stuff used to send messages
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -20,10 +20,7 @@ public class Client {
 
 		outToServer.writeBytes("Hej Rune" + '\n');
 		outToServer.writeBytes("Nisser" + '\n');
-//		clientSocket.close();
-		while (true) {
-
-		}
+		clientSocket.close();
 
 	}
 
