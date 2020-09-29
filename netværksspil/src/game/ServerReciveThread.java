@@ -19,19 +19,18 @@ public class ServerReciveThread extends Thread {
 	@Override
 	public void run() {
 		while (clientSocket.isConnected()) {
-			modtag();
+			try {
+				modifiedSentence = inFromClient.readLine();
+				System.out.println(modifiedSentence);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private void modtag() {
 		// Modtag besked
-		try {
-			modifiedSentence = inFromClient.readLine();
-			System.out.println(modifiedSentence);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	}
 }

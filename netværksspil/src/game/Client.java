@@ -7,21 +7,24 @@ import java.net.Socket;
 
 public class Client {
 
-	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		//Making a connection
-		Socket clientSocket= new Socket("localhost",12345);
-				
-		//Stuff used to send messages
+
+		// Making a connection
+		Socket clientSocket = new Socket("10.24.67.112", 12345);
+
+		// Stuff used to send messages
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-		//BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-		
+		// BufferedReader inFromUser = new BufferedReader(new
+		// InputStreamReader(System.in));
+
 		outToServer.writeBytes("Hej Rune" + '\n');
 		outToServer.writeBytes("Nisser" + '\n');
-		clientSocket.close();
+//		clientSocket.close();
+		while (true) {
+
+		}
+
 	}
-	
-	
+
 }
