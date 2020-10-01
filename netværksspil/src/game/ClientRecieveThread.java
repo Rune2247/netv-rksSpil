@@ -8,12 +8,14 @@ public class ClientRecieveThread extends Thread {
 
 	private Socket theSocket;
 	private BufferedReader inFromServer;
+
 	private Player player;
 
-	public ClientRecieveThread(Socket theSocket, BufferedReader inFromServer, Player player) {
+	private GameState gameState;
+
+	public ClientRecieveThread(Socket theSocket, BufferedReader inFromServer) {
 		this.theSocket = theSocket;
 		this.inFromServer = inFromServer;
-		this.player = player;
 	}
 
 	public void run() {
@@ -25,7 +27,10 @@ public class ClientRecieveThread extends Thread {
 	public void recieveData() {
 		try {
 			String recived = inFromServer.readLine();
-			System.out.println(recived);
+			gameState = GameState.modtagGameState(recived);
+			Client.players = gameState.getPlayers();
+			Client.score = gameState.getScore();
+			;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -37,7 +42,12 @@ public class ClientRecieveThread extends Thread {
 		player.ypos = ypos;
 	}
 
+	public GameState getGameState() {
+		return this.gameState;
+	}
+
 	public void updatePlayerName(String pName) {
 		player.name = pName;
 	}
+
 }

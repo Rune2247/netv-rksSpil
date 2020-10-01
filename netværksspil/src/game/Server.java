@@ -74,7 +74,7 @@ public class Server {
 	public GameState newPlayer(GameState gameState, String name) {
 		GameState tempState = gameState;
 
-		Player newPlayer = newPlayer(gameState.players.size(), name);
+		// Player newPlayer = newPlayer(gameState.players.size(), name);
 
 		return tempState;
 	}

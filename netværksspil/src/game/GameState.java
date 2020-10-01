@@ -32,7 +32,7 @@ public class GameState {
 		return json;
 	}
 
-	public GameState modtagGameState(String json) {
+	public static GameState modtagGameState(String json) {
 		JSONObject jo = new JSONObject(json);
 		JSONArray ja = jo.getJSONArray("players");
 		ArrayList<Player> tempList = new ArrayList<>();
