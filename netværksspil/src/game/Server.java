@@ -22,6 +22,7 @@ public class Server {
 	// private GameState gameState = new GameState();
 
 	public static void main(String[] args) throws Exception {
+		GameState gameState = new GameState(0, new ArrayList<Player>());
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
@@ -30,26 +31,24 @@ public class Server {
 			outPutStreamList.add(new DataOutputStream(connectionSocket.getOutputStream()));
 
 			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+			String newP = inFromClient.readLine();
+			newPlayer(gameState, newP);
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
 
 			serverRecive.start();
 
-			ArrayList<Player> players = new ArrayList<>();
-			Player a = new Player(1, "Henrik", 12, 4, "Den vej", 1);
-			Player b = new Player(2, "Peter", 120, 400, "Den vej", 2);
-			Player c = new Player(3, "Spiller 1", 12000, 4000, "Den vej", 2);
-			players.add(a);
-			players.add(b);
-			players.add(c);
-			GameState state = new GameState(100, players);
+			Player a = new Player(1, "Henrik", 2, 2, "up", 1);
+			Player b = new Player(2, "Peter", 2, 3, "down", 2);
+			Player c = new Player(3, "Spiller 1", 2, 4, "left", 2);
+			gameState.players.add(a);
+			gameState.players.add(b);
+			gameState.players.add(c);
 
-			sendGameState(state);
+			sendGameState(gameState);
+
 		}
 
 	}
-
-	// private int score = 2;
-//	private ArrayList<Player> players = new ArrayList<>();
 
 // Send gameState i JSON Format til alle spillere. 
 	public static void sendGameState(GameState gameState) {
@@ -71,21 +70,23 @@ public class Server {
 
 	}
 
-	public GameState newPlayer(GameState gameState, String name) {
+	public static GameState newPlayer(GameState gameState, String name) {
+		// Denne metode finder en fri plads i spawn og opretter en ny spiller med "Navn"
+		System.out.println(name + " Has joined the game");
 		GameState tempState = gameState;
+		pair friplads = getFreeSpawn(gameState.getPlayers());
 
-		// Player newPlayer = newPlayer(gameState.players.size(), name);
+		Player newPlayer = new Player(gameState.players.size(), name, friplads.x, friplads.y, "down", 0);
 
+		tempState.players.add(newPlayer);
 		return tempState;
 	}
 
-	public pair getFreeSpawn(List<Player> players)
-	// finds a random new position which is not wall
-	// and not occupied by other players
+	public static pair getFreeSpawn(List<Player> players)
+	// denne metode finder en fri plads i spawn området
 	{
 		int x = 1;
 		int y = 1;
-		boolean found = false;
 		// Finder tom plads i spawn
 		ArrayList<pair> pairs = new ArrayList<>();
 		ArrayList<pair> spawnPairs = new ArrayList<>();
@@ -120,9 +121,12 @@ public class Server {
 		}
 
 		for (int i = 0; i < spawnPairs.size(); i++) {
-
+			if (pairs.contains(spawnPairs.get(i))) {
+				spawnPairs.remove(i);
+			}
 		}
-		pair p = new pair(2, 1);
+
+		pair p = spawnPairs.get(0);
 
 		return p;
 	}

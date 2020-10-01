@@ -22,7 +22,7 @@ public class GameState {
 		String array = "players:[";
 		// array = "players: ";
 		for (Player player : players) {
-			array += "{id: " + player.id + "name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: "
+			array += "{id: " + player.id + ", name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: "
 					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + "},";
 
 		}
