@@ -1,13 +1,16 @@
 package game;
 
 public class Player {
+	int id;
 	String name;
 	int xpos;
 	int ypos;
 	int point;
+
 	String direction;
 
-	public Player(String name, int xpos, int ypos, String direction, int point) {
+	public Player(int id, String name, int xpos, int ypos, String direction, int point) {
+		this.id = id;
 		this.name = name;
 		this.xpos = xpos;
 		this.ypos = ypos;

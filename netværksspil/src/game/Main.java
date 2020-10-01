@@ -111,12 +111,12 @@ public class Main extends Application {
 
 			// Setting up standard players
 			pair p = getRandomFreePosition();
-			me = new Player("Orville", p.getX(), p.getY(), "up", 2);
+			me = new Player(1, "Orville", p.getX(), p.getY(), "up", 2);
 			players.add(me);
 			fields[p.getX()][p.getY()].setGraphic(new ImageView(hero_up));
 
 			p = getRandomFreePosition();
-			Player harry = new Player("Harry", p.getX(), p.getY(), "up", 2);
+			Player harry = new Player(1, "Harry", p.getX(), p.getY(), "up", 2);
 			players.add(harry);
 			fields[p.getX()][p.getY()].setGraphic(new ImageView(hero_up));
 

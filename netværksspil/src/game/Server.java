@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javafx.util.Pair;
+
 public class Server {
 
 	/**
@@ -33,9 +35,9 @@ public class Server {
 			serverRecive.start();
 
 			ArrayList<Player> players = new ArrayList<>();
-			Player a = new Player("Henrik", 12, 4, "Den vej", 1);
-			Player b = new Player("Peter", 120, 400, "Den vej", 2);
-			Player c = new Player("Spiller 1", 12000, 4000, "Den vej", 2);
+			Player a = new Player(1, "Henrik", 12, 4, "Den vej", 1);
+			Player b = new Player(2, "Peter", 120, 400, "Den vej", 2);
+			Player c = new Player(3, "Spiller 1", 12000, 4000, "Den vej", 2);
 			players.add(a);
 			players.add(b);
 			players.add(c);
@@ -72,30 +74,56 @@ public class Server {
 	public GameState newPlayer(GameState gameState, String name) {
 		GameState tempState = gameState;
 
+		Player newPlayer = newPlayer(gameState.players.size(), name);
+
 		return tempState;
 	}
 
-	public pair getRandomFreePosition(List<Player> players)
+	public pair getFreeSpawn(List<Player> players)
 	// finds a random new position which is not wall
 	// and not occupied by other players
 	{
 		int x = 1;
 		int y = 1;
 		boolean found = false;
-		while (!found) {
-			Random r = new Random();
-			x = Math.abs(r.nextInt() % 18) + 1;
-			y = Math.abs(r.nextInt() % 18) + 1;
-			if (Generel.board[y].charAt(x) == ' ') {
-				found = true;
-				for (Player p : players) {
-					if (p.xpos == x && p.ypos == y)
-						found = false;
-				}
+		// Finder tom plads i spawn
+		ArrayList<pair> pairs = new ArrayList<>();
+		ArrayList<pair> spawnPairs = new ArrayList<>();
+		pair p1 = new pair(9, 9);
+		pair p2 = new pair(9, 10);
+		pair p3 = new pair(9, 11);
+		pair p4 = new pair(9, 12);
+		pair p5 = new pair(10, 9);
+		pair p6 = new pair(10, 12);
+		pair p7 = new pair(11, 9);
+		pair p8 = new pair(11, 12);
+		pair p9 = new pair(12, 9);
+		pair p10 = new pair(12, 10);
+		pair p11 = new pair(12, 11);
+		pair p12 = new pair(12, 12);
+		spawnPairs.add(p1);
+		spawnPairs.add(p2);
+		spawnPairs.add(p3);
+		spawnPairs.add(p4);
+		spawnPairs.add(p5);
+		spawnPairs.add(p6);
+		spawnPairs.add(p7);
+		spawnPairs.add(p8);
+		spawnPairs.add(p9);
+		spawnPairs.add(p10);
+		spawnPairs.add(p11);
+		spawnPairs.add(p12);
 
-			}
+		for (int i = 0; i < players.size(); i++) {
+			pair temp = new pair(players.get(i).getXpos(), players.get(i).getYpos());
+			pairs.add(temp);
 		}
-		pair p = new pair(x, y);
+
+		for (int i = 0; i < spawnPairs.size(); i++) {
+
+		}
+		pair p = new pair(2, 1);
+
 		return p;
 	}
 

@@ -22,8 +22,8 @@ public class GameState {
 		String array = "players:[";
 		// array = "players: ";
 		for (Player player : players) {
-			array += "{name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: " + player.ypos
-					+ ", direction: \"" + player.direction + "\", point: " + player.point + "},";
+			array += "{id: " + player.id + "name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: "
+					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + "},";
 
 		}
 		array += "]";
@@ -39,8 +39,8 @@ public class GameState {
 		for (int i = 0; i < ja.length(); i++) {
 			JSONObject jp = ja.getJSONObject(i);
 
-			Player p = new Player(jp.getString("name"), jp.getInt("xpos"), jp.getInt("ypos"), jp.getString("direction"),
-					jp.getInt("point"));
+			Player p = new Player(jp.getInt("id"), jp.getString("name"), jp.getInt("xpos"), jp.getInt("ypos"),
+					jp.getString("direction"), jp.getInt("point"));
 			tempList.add(p);
 
 		}
