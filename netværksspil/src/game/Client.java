@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Client {
+	
+	private GameState gameState;
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -13,12 +15,12 @@ public class Client {
 		Player player = new Player("john", 5, 5, "down", 2);
 
 		// Making a connection
-		Socket clientSocket = new Socket("10.24.3.83", 12345);
+		Socket clientSocket = new Socket("10.24.2.243", 12345);
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 		// Making a Thread
-		ClientRecieveThread recieveThread = new ClientRecieveThread(clientSocket, inFromServer, player);
+		ClientRecieveThread recieveThread = new ClientRecieveThread(clientSocket, inFromServer);
 		recieveThread.start();
 
 		outToServer.writeBytes("Hej Rune" + '\n');
