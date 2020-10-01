@@ -54,4 +54,11 @@ public class GameState {
 		return score + ": " + players.toString();
 	}
 
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public int getScore() {
+		return score;
+	}
 }

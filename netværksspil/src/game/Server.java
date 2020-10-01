@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -33,27 +32,34 @@ public class Server {
 
 			serverRecive.start();
 
-			// sendGameState();
+			ArrayList<Player> players = new ArrayList<>();
+			Player a = new Player("Henrik", 12, 4, "Den vej", 1);
+			Player b = new Player("Peter", 120, 400, "Den vej", 2);
+			Player c = new Player("Spiller 1", 12000, 4000, "Den vej", 2);
+			players.add(a);
+			players.add(b);
+			players.add(c);
+			GameState state = new GameState(100, players);
+
+			sendGameState(state);
 		}
 
 	}
 
+	// private int score = 2;
+//	private ArrayList<Player> players = new ArrayList<>();
+
 // Send gameState i JSON Format til alle spillere. 
-	public static void sendGameState() {
+	public static void sendGameState(GameState gameState) {
 		// Pak gameState sammen
 
-		String json;
+		String json = gameState.sendGameState();
 
 		// send
-		try {
-			outPutStreamList.get(0).writeBytes("+55+5+6651554+5" + '\n');
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		for (int i = 0; i < outPutStreamList.size(); i++) {
 			try {
-				outPutStreamList.get(i).writeBytes("HVad sÅ dEr3 Mand" + '\n');
+				outPutStreamList.get(i).writeBytes(json + "\n");
 				System.out.println("Der er fiksere");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -63,9 +69,13 @@ public class Server {
 
 	}
 
-	public static List<Player> players = new ArrayList<Player>();
+	public GameState newPlayer(GameState gameState, String name) {
+		GameState tempState = gameState;
 
-	public pair getRandomFreePosition()
+		return tempState;
+	}
+
+	public pair getRandomFreePosition(List<Player> players)
 	// finds a random new position which is not wall
 	// and not occupied by other players
 	{
