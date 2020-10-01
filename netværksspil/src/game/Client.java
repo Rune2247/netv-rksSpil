@@ -2,7 +2,9 @@ package game;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class Client extends Application {
 	public static Player me;
 	public static List<Player> players = new ArrayList<Player>();
 	public static int score;
+	public static int id;
+	private static DataOutputStream outToServer;
 
 	private static Label[][] fields;
 	private TextArea scoreList;
@@ -108,17 +112,14 @@ public class Client extends Application {
 					break;
 				}
 			});
-
+			
+			/*
 			// Setting up standard players
 			pair p = getRandomFreePosition();
 			me = new Player(2, "Orville", p.getX(), p.getY(), "up", 2);
 			players.add(me);
 			fields[p.getX()][p.getY()].setGraphic(new ImageView(hero_up));
-
-			p = getRandomFreePosition();
-			Player harry = new Player(2, "Harry", p.getX(), p.getY(), "up", 2);
-			players.add(harry);
-			fields[p.getX()][p.getY()].setGraphic(new ImageView(hero_up));
+			*/
 
 			scoreList.setText(getScoreList());
 		} catch (Exception e) {
@@ -238,8 +239,18 @@ public class Client extends Application {
 	}
 
 	public void playerMoved(int delta_x, int delta_y, String direction) {
-		updatePlayer(delta_x, delta_y, direction);
-		updateScoreTable();
+		
+		try {
+			String move = "{id: " + Client.id + ", xpos: " + delta_x + ", ypos: " + delta_y + ", direction: \"" + direction + "\"}" + '\n';
+			System.out.println(move);
+			Client.outToServer.writeBytes(move);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//updatePlayer(delta_x, delta_y, direction);
+		//updateScoreTable();
 	}
 
 	public String getScoreList() {
@@ -264,20 +275,22 @@ public class Client extends Application {
 
 		// Making a connection
 		Socket clientSocket = new Socket("10.24.2.243", 12345);
-		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+		Client.outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 		
 		String playerName = inFromUser.readLine();		
-		outToServer.writeBytes(playerName + '\n');
+		Client.outToServer.writeBytes(playerName + '\n');
+		Client.id = Integer.parseInt(inFromServer.readLine());
+		System.out.println(Client.id);
 
 		// Making a Thread
 		ClientRecieveThread recieveThread = new ClientRecieveThread(clientSocket, inFromServer);
 		recieveThread.start();
 
-		outToServer.writeBytes("Hej Rune" + '\n');
-		outToServer.writeBytes("Nissr" + '\n');
+		Client.outToServer.writeBytes("Hej Rune" + '\n');
+		Client.outToServer.writeBytes("Nissr" + '\n');
 		
 		launch(args);
 
