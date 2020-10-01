@@ -37,6 +37,7 @@ public class ServerReciveThread extends Thread {
 				luk = false;
 				System.out.println("FUUUCk");
 			} else {
+
 				System.out.println(modifiedSentence);
 				udPakComando(modifiedSentence);
 				Server.sendGameState();

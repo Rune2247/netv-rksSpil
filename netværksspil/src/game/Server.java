@@ -117,10 +117,6 @@ public class Server {
 			pairs.add(temp);
 
 		}
-		System.out.println(pairs.toString() + " TEEEST");
-		System.out.println();
-		System.out.println(spawnPairs.toString());
-		System.out.println("Størrelse" + pairs.size());
 
 		if (pairs.size() == 0) {
 			return spawnPairs.get(0);
