@@ -20,38 +20,35 @@ public class Server {
 
 	private static ArrayList<DataOutputStream> outPutStreamList = new ArrayList<DataOutputStream>();
 	// private GameState gameState = new GameState();
+	public static GameState gameState = new GameState(0, new ArrayList<Player>());
 
 	public static void main(String[] args) throws Exception {
-		GameState gameState = new GameState(0, new ArrayList<Player>());
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
-			outPutStreamList.add(new DataOutputStream(connectionSocket.getOutputStream()));
+
+			DataOutputStream outToClient = (new DataOutputStream(connectionSocket.getOutputStream()));
+
+			outPutStreamList.add(outToClient);
 
 			BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			String newP = inFromClient.readLine();
-			newPlayer(gameState, newP);
+			outToClient.writeBytes(newPlayer(gameState, newP) + "\n");
+
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
 
 			serverRecive.start();
 
-			Player a = new Player(1, "Henrik", 2, 2, "up", 1);
-			Player b = new Player(2, "Peter", 2, 3, "down", 2);
-			Player c = new Player(3, "Spiller 1", 2, 4, "left", 2);
-			gameState.players.add(a);
-			gameState.players.add(b);
-			gameState.players.add(c);
-
-			sendGameState(gameState);
+			sendGameState();
 
 		}
 
 	}
 
 // Send gameState i JSON Format til alle spillere. 
-	public static void sendGameState(GameState gameState) {
+	public static void sendGameState() {
 		// Pak gameState sammen
 
 		String json = gameState.sendGameState();
@@ -70,7 +67,7 @@ public class Server {
 
 	}
 
-	public static GameState newPlayer(GameState gameState, String name) {
+	public static int newPlayer(GameState gameState, String name) {
 		// Denne metode finder en fri plads i spawn og opretter en ny spiller med "Navn"
 		System.out.println(name + " Has joined the game");
 		GameState tempState = gameState;
@@ -78,15 +75,15 @@ public class Server {
 
 		Player newPlayer = new Player(gameState.players.size(), name, friplads.x, friplads.y, "down", 0);
 
-		tempState.players.add(newPlayer);
-		return tempState;
+		gameState.players.add(newPlayer);
+
+		return newPlayer.id;
 	}
 
 	public static pair getFreeSpawn(List<Player> players)
 	// denne metode finder en fri plads i spawn området
 	{
-		int x = 1;
-		int y = 1;
+
 		// Finder tom plads i spawn
 		ArrayList<pair> pairs = new ArrayList<>();
 		ArrayList<pair> spawnPairs = new ArrayList<>();
@@ -118,17 +115,40 @@ public class Server {
 		for (int i = 0; i < players.size(); i++) {
 			pair temp = new pair(players.get(i).getXpos(), players.get(i).getYpos());
 			pairs.add(temp);
+
 		}
+		System.out.println(pairs.toString() + " TEEEST");
+		System.out.println();
+		System.out.println(spawnPairs.toString());
+		System.out.println("Størrelse" + pairs.size());
 
-		for (int i = 0; i < spawnPairs.size(); i++) {
-			if (pairs.contains(spawnPairs.get(i))) {
-				spawnPairs.remove(i);
-			}
-		}
+		if (pairs.size() == 0) {
+			return spawnPairs.get(0);
+		} else if (pairs.size() == 1) {
+			return spawnPairs.get(1);
+		} else if (pairs.size() == 2) {
+			return spawnPairs.get(2);
+		} else if (pairs.size() == 3) {
+			return spawnPairs.get(3);
+		} else if (pairs.size() == 4) {
+			return spawnPairs.get(4);
+		} else if (pairs.size() == 5) {
+			return spawnPairs.get(5);
+		} else if (pairs.size() == 6) {
+			return spawnPairs.get(6);
+		} else if (pairs.size() == 7) {
+			return spawnPairs.get(7);
+		} else if (pairs.size() == 8) {
+			return spawnPairs.get(8);
+		} else if (pairs.size() == 9) {
+			return spawnPairs.get(9);
+		} else if (pairs.size() == 10) {
+			return spawnPairs.get(10);
+		} else if (pairs.size() == 11) {
+			return spawnPairs.get(11);
+		} else
+			return pairs.get(12);
 
-		pair p = spawnPairs.get(0);
-
-		return p;
 	}
 
 }

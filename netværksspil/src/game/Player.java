@@ -47,6 +47,10 @@ public class Player {
 		point += p;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String toString() {
 		return name + " " + point + " " + xpos + " " + ypos + " " + direction + "         ";
 	}
