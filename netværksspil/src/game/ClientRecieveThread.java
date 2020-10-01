@@ -30,7 +30,7 @@ public class ClientRecieveThread extends Thread {
 			gameState = GameState.modtagGameState(recived);
 			Client.players = gameState.getPlayers();
 			Client.score = gameState.getScore();
-			System.out.println("RUNE!");
+			Client.updateAllPlayers();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

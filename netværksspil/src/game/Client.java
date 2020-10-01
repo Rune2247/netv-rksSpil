@@ -34,7 +34,7 @@ public class Client extends Application {
 	public static List<Player> players = new ArrayList<Player>();
 	public static int score;
 
-	private Label[][] fields;
+	private static Label[][] fields;
 	private TextArea scoreList;
 
 	@Override
@@ -175,13 +175,15 @@ public class Client extends Application {
 
 	}
 
-	public void updateAllPlayers() {
+	public static void updateAllPlayers() {
+		System.out.println(players.size());
 		for (Player player : players) {
 			updatePlayerOnScreen(player);
 		}
 	}
 
-	public void updatePlayerOnScreen(Player player) {
+	public static void updatePlayerOnScreen(Player player) {
+		System.out.println(player.toString());
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_right));
@@ -264,6 +266,11 @@ public class Client extends Application {
 		Socket clientSocket = new Socket("10.24.2.243", 12345);
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		
+		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+		
+		String playerName = inFromUser.readLine();		
+		outToServer.writeBytes(playerName + '\n');
 
 		// Making a Thread
 		ClientRecieveThread recieveThread = new ClientRecieveThread(clientSocket, inFromServer);
@@ -271,6 +278,8 @@ public class Client extends Application {
 
 		outToServer.writeBytes("Hej Rune" + '\n');
 		outToServer.writeBytes("Nissr" + '\n');
+		
+		launch(args);
 
 	}
 
