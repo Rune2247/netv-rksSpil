@@ -18,7 +18,7 @@ public class Server {
 	 */
 
 	private static ArrayList<DataOutputStream> outPutStreamList = new ArrayList<DataOutputStream>();
-	private GameState gameState = new GameState();
+	// private GameState gameState = new GameState();
 
 	public static void main(String[] args) throws Exception {
 
@@ -33,13 +33,18 @@ public class Server {
 
 			serverRecive.start();
 
-			sendGameState();
+			// sendGameState();
 		}
 
 	}
 
 // Send gameState i JSON Format til alle spillere. 
 	public static void sendGameState() {
+		// Pak gameState sammen
+
+		String json;
+
+		// send
 		try {
 			outPutStreamList.get(0).writeBytes("+55+5+6651554+5" + '\n');
 		} catch (IOException e1) {

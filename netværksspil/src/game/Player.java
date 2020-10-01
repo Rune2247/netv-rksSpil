@@ -7,12 +7,12 @@ public class Player {
 	int point;
 	String direction;
 
-	public Player(String name, int xpos, int ypos, String direction) {
+	public Player(String name, int xpos, int ypos, String direction, int point) {
 		this.name = name;
 		this.xpos = xpos;
 		this.ypos = ypos;
 		this.direction = direction;
-		this.point = 0;
+		this.point = point;
 
 	}
 
