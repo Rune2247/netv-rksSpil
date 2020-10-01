@@ -28,7 +28,7 @@ public class GameState {
 		}
 		array += "]";
 
-		String json = ("{" + array + "}");
+		String json = ("{score: " + this.score + ", " + array + "}");
 		return json;
 	}
 
@@ -38,7 +38,6 @@ public class GameState {
 		ArrayList<Player> tempList = new ArrayList<>();
 		for (int i = 0; i < ja.length(); i++) {
 			JSONObject jp = ja.getJSONObject(i);
-			System.out.println(jp.getInt("xpos"));
 
 			Player p = new Player(jp.getString("name"), jp.getInt("xpos"), jp.getInt("ypos"), jp.getString("direction"),
 					jp.getInt("point"));
