@@ -270,7 +270,7 @@ public class Client extends Application {
 		recieveThread.start();
 
 		outToServer.writeBytes("Hej Rune" + '\n');
-		outToServer.writeBytes("Nisser" + '\n');
+		outToServer.writeBytes("Nissr" + '\n');
 
 	}
 
