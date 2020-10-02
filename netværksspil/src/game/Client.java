@@ -141,18 +141,22 @@ public class Client extends Application {
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_right));
+				fields[player.xpos-1][player.ypos].setGraphic(new ImageView(image_floor));
 			}
 			;
 			if (player.direction.equals("left")) {
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_left));
+				fields[player.xpos+1][player.ypos].setGraphic(new ImageView(image_floor));
 			}
 			;
 			if (player.direction.equals("up")) {
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_up));
+				fields[player.xpos][player.ypos+1].setGraphic(new ImageView(image_floor));
 			}
 			;
 			if (player.direction.equals("down")) {
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_down));
+				fields[player.xpos][player.ypos-1].setGraphic(new ImageView(image_floor));
 			}
 			;
 		});
@@ -190,7 +194,7 @@ public class Client extends Application {
 		// TODO Auto-generated method stub
 
 		// Making a connection
-		Socket clientSocket = new Socket("10.24.2.243", 12345);
+		Socket clientSocket = new Socket("localhost", 12345);
 		Client.outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		
