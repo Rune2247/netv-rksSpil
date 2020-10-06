@@ -60,17 +60,18 @@ public class ServerReciveThread extends Thread {
 	}
 
 	private void reset() {
-		// ArrayList<Player> newPlayers = Server.gameState.getPlayers();
+		ArrayList<Player> newPlayers = new ArrayList<>();
 		// Setter spillere op
 
 		pair nSpawn;
 		for (int i = 0; i < Server.gameState.getPlayers().size(); i++) {
-			nSpawn = Server.getFreeSpawn(Server.gameState.getPlayers());
+			nSpawn = Server.getFreeSpawn(newPlayers);
 			System.out.println("New pos: " + nSpawn.x + ", " + nSpawn.y);
 
-			Server.gameState.getPlayers().get(i).setXpos(nSpawn.getX());
-			Server.gameState.getPlayers().get(i).setYpos(nSpawn.getY());
-			Server.gameState.getPlayers().get(i).resetPoints();
+			Server.gameState.players.get(i).setXpos(nSpawn.getX());
+			Server.gameState.players.get(i).setYpos(nSpawn.getY());
+			Server.gameState.players.get(i).resetPoints();
+			newPlayers.add(Server.gameState.players.get(i));
 		}
 		Server.gameState.score = 0;
 		// Opret nyt gameState med de nye spiller pos

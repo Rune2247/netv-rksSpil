@@ -20,7 +20,7 @@ public class Server {
 
 	private static ArrayList<DataOutputStream> outPutStreamList = new ArrayList<DataOutputStream>();
 	// private GameState gameState = new GameState();
-	public static GameState gameState = new GameState(0, new ArrayList<Player>());
+	public static GameState gameState = new GameState(0, new ArrayList<Player>(), new ArrayList<Fruit>(), 0);
 
 	public static void main(String[] args) throws Exception {
 
@@ -101,18 +101,17 @@ public class Server {
 
 		if (players.size() == 0) {
 			return spawnPairs.get(0);
-		} 
-		
+		}
+
 		for (int i = 0; i < players.size(); i++) {
 			spawned.add(spawnPairs.get(i));
 		}
-		
+
 		for (int i = 0; i < spawnPairs.size(); i++) {
-			if(!spawned.contains(spawnPairs.get(i))) {
+			if (!spawned.contains(spawnPairs.get(i))) {
 				return spawnPairs.get(i);
-		}
-		
-		
+			}
+
 		}
 
 		return new pair(2, 2);
