@@ -61,6 +61,7 @@ public class GameState {
 		for (int i = 0; i < jf.length(); i++) {
 			JSONObject jp = jf.getJSONObject(i);
 			Fruit f = new Fruit(jp.getString("name"));
+			tempFruit.add(f);
 		}
 
 		GameState tempState = new GameState(0, tempList, tempFruit, 0);

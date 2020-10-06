@@ -27,9 +27,9 @@ public class ClientRecieveThread extends Thread {
 	public void recieveData() {
 		try {
 			String recived = inFromServer.readLine();
-			gameState = GameState.modtagGameState(recived);
-			Client.players = gameState.getPlayers();
-			Client.score = gameState.getScore();
+			Client.gameState = GameState.modtagGameState(recived);
+			Client.players = Client.gameState.getPlayers();
+			Client.score = Client.gameState.getScore();
 			Client.updateAllPlayers();
 			Client.updateScoreTable();
 			Client.updateFruitList();
