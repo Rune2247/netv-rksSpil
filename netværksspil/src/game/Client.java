@@ -30,6 +30,8 @@ public class Client extends Application {
 
 	public static Image image_floor;
 	public static Image image_wall;
+	public static Image image_banana;
+	public static Image image_peach;
 	public static Image hero_right, hero_left, hero_up, hero_down;
 
 	public static Player me;
@@ -41,8 +43,7 @@ public class Client extends Application {
 	private static Label[][] fields;
 	private TextArea scoreList;
 
-	
-	//---- SETS UP THE GAME ----
+	// ---- SETS UP THE GAME ----
 	// Sets up GUI and adds listners to the keys
 	// Also updates the scoreboard once
 	@Override
@@ -65,6 +66,8 @@ public class Client extends Application {
 
 			image_wall = new Image(getClass().getResourceAsStream("Image/wall4.png"), size, size, false, false);
 			image_floor = new Image(getClass().getResourceAsStream("Image/floor1.png"), size, size, false, false);
+			image_banana = new Image(getClass().getResourceAsStream("Image/f_banana.png"), size, size, false, false);
+			image_peach = new Image(getClass().getResourceAsStream("Image/f_peach.png"), size, size, false, false);
 
 			hero_right = new Image(getClass().getResourceAsStream("Image/heroRight.png"), size, size, false, false);
 			hero_left = new Image(getClass().getResourceAsStream("Image/heroLeft.png"), size, size, false, false);
@@ -80,6 +83,12 @@ public class Client extends Application {
 						break;
 					case ' ':
 						fields[i][j] = new Label("", new ImageView(image_floor));
+						break;
+					case 'b':
+						fields[i][j] = new Label("", new ImageView(image_banana));
+						break;
+					case 'p':
+						fields[i][j] = new Label("", new ImageView(image_peach));
 						break;
 					default:
 						throw new Exception("Illegal field value: " + Generel.board[j].charAt(i));
@@ -126,7 +135,6 @@ public class Client extends Application {
 		}
 	}
 
-	
 	// Runs through all the players and calls updatePlayerOnScreen.
 	// See updatePlayerOnScreen for description
 	public static void updateAllPlayers() {
@@ -134,49 +142,50 @@ public class Client extends Application {
 			updatePlayerOnScreen(player);
 		}
 	}
-	
-	//Checks if a postion contains a player.
+
+	// Checks if a postion contains a player.
 	// The method is used to stop writing floor image where a player is standing.
-	public static boolean checkIfFieldIsPlayer(int x,int y) {
+	public static boolean checkIfFieldIsPlayer(int x, int y) {
 		for (Player player : players) {
-			if(player.xpos == x && player.ypos == y) {
+			if (player.xpos == x && player.ypos == y) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	
-	//Takes in a player and writes it image on the screen.
-	//The method uses "checkIfFieldIsPlayer" to check if the last position is a player.
-	//If a player stands on anothers players last position, it dosent write floor on this position.
+	// Takes in a player and writes it image on the screen.
+	// The method uses "checkIfFieldIsPlayer" to check if the last position is a
+	// player.
+	// If a player stands on anothers players last position, it dosent write floor
+	// on this position.
 	public static void updatePlayerOnScreen(Player player) {
 		System.out.println(player.toString());
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
-				if(checkIfFieldIsPlayer(player.xpos-1, player.ypos)) {
-					fields[player.xpos-1][player.ypos].setGraphic(new ImageView(image_floor));
+				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos)) {
+					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_floor));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_right));
 			}
 			;
 			if (player.direction.equals("left")) {
-				if(checkIfFieldIsPlayer(player.xpos+1, player.ypos)) {
-					fields[player.xpos+1][player.ypos].setGraphic(new ImageView(image_floor));
+				if (checkIfFieldIsPlayer(player.xpos + 1, player.ypos)) {
+					fields[player.xpos + 1][player.ypos].setGraphic(new ImageView(image_floor));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_left));
 			}
 			;
 			if (player.direction.equals("up")) {
-				if(checkIfFieldIsPlayer(player.xpos, player.ypos+1)) {
-					fields[player.xpos][player.ypos+1].setGraphic(new ImageView(image_floor));
+				if (checkIfFieldIsPlayer(player.xpos, player.ypos + 1)) {
+					fields[player.xpos][player.ypos + 1].setGraphic(new ImageView(image_floor));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_up));
 			}
 			;
 			if (player.direction.equals("down")) {
-				if(checkIfFieldIsPlayer(player.xpos, player.ypos-1)) {
-					fields[player.xpos][player.ypos-1].setGraphic(new ImageView(image_floor));
+				if (checkIfFieldIsPlayer(player.xpos, player.ypos - 1)) {
+					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_floor));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_down));
 			}
@@ -184,28 +193,27 @@ public class Client extends Application {
 		});
 	}
 
-	//Updates the scoreboard
+	// Updates the scoreboard
 	public void updateScoreTable() {
 		Platform.runLater(() -> {
 			scoreList.setText("Score: " + Client.score);
 		});
 	}
 
-	
-	//Sends the information of a player whenever a player hits a move key.
+	// Sends the information of a player whenever a player hits a move key.
 	public void playerMoved(int delta_x, int delta_y, String direction) {
-		
+
 		try {
-			String move = "{id: " + Client.id + ", xpos: " + delta_x + ", ypos: " + delta_y + ", direction: \"" + direction + "\"}" + '\n';
+			String move = "{id: " + Client.id + ", xpos: " + delta_x + ", ypos: " + delta_y + ", direction: \""
+					+ direction + "\"}" + '\n';
 			System.out.println(move);
 			Client.outToServer.writeBytes(move);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	//Sends a reset command to the server.
+
+	// Sends a reset command to the server.
 	public void resetGame() {
 		try {
 			Client.outToServer.writeBytes("r" + '\n');
@@ -214,7 +222,7 @@ public class Client extends Application {
 		}
 	}
 
-	//---- THE CLIENTS MAIN METHOD ----
+	// ---- THE CLIENTS MAIN METHOD ----
 	// When the client starts it waits for the players input of a name.
 	// When entered, joins a server.
 	public static void main(String[] args) throws Exception {
@@ -223,10 +231,10 @@ public class Client extends Application {
 		Socket clientSocket = new Socket("10.24.3.237", 12345);
 		Client.outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		
+
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-		
-		String playerName = inFromUser.readLine();		
+
+		String playerName = inFromUser.readLine();
 		Client.outToServer.writeBytes(playerName + '\n');
 		Client.id = Integer.parseInt(inFromServer.readLine());
 		System.out.println(Client.id);
@@ -235,7 +243,6 @@ public class Client extends Application {
 		ClientRecieveThread recieveThread = new ClientRecieveThread(clientSocket, inFromServer);
 		recieveThread.start();
 
-		
 		launch(args);
 
 	}

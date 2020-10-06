@@ -17,10 +17,10 @@ public class Generel {
 			"w                  w",
 			"w                  w",
 			"w                  w",
-			"w                  w",
-			"w                  w",
-			"w                  w",
-			"w                  w",
+			"w  p p             w",
+			"w   b              w",
+			"w   b              w",
+			"w   b              w",
 			"wwwwwwwwwwwwwwwwwwww"
 	};
 

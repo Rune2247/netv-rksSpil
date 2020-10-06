@@ -42,7 +42,8 @@ public class ServerReciveThread extends Thread {
 			}
 			// Hvis "reset" genstart spillet
 			if (modifiedSentence.equals("r")) {
-				Server.gameState = reset();
+				// Clear playerlisten i nu værende gameState
+				reset();
 				Server.sendGameState();
 				// Break
 				return;
@@ -58,25 +59,23 @@ public class ServerReciveThread extends Thread {
 		}
 	}
 
-	private GameState reset() {
-		ArrayList<Player> newPlayers = Server.gameState.getPlayers();
-		System.out.println(newPlayers.toString() + "STRIIRIIRIRIRIRIRI");
+	private void reset() {
+		// ArrayList<Player> newPlayers = Server.gameState.getPlayers();
 		// Setter spillere op
 
 		pair nSpawn;
-		for (int i = 0; i < newPlayers.size(); i++) {
-			nSpawn = Server.getFreeSpawn(newPlayers);
+		for (int i = 0; i < Server.gameState.getPlayers().size(); i++) {
+			nSpawn = Server.getFreeSpawn(Server.gameState.getPlayers());
 			System.out.println("New pos: " + nSpawn.x + ", " + nSpawn.y);
 
-			newPlayers.get(i).setXpos(nSpawn.getX());
-			newPlayers.get(i).setYpos(nSpawn.getY());
-			newPlayers.get(i).resetPoints();
+			Server.gameState.getPlayers().get(i).setXpos(nSpawn.getX());
+			Server.gameState.getPlayers().get(i).setYpos(nSpawn.getY());
+			Server.gameState.getPlayers().get(i).resetPoints();
 		}
-		System.out.println("FISK");
+		Server.gameState.score = 0;
 		// Opret nyt gameState med de nye spiller pos
-		GameState newGameState = new GameState(0, newPlayers);
+		// GameState newGameState = new GameState(0, newPlayers);
 		System.out.println("Game Reset");
-		return newGameState;
 	}
 
 	// Udpakker en comando fra spillerne
