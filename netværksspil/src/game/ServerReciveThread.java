@@ -71,6 +71,7 @@ public class ServerReciveThread extends Thread {
 			Server.gameState.players.get(i).setXpos(nSpawn.getX());
 			Server.gameState.players.get(i).setYpos(nSpawn.getY());
 			Server.gameState.players.get(i).resetPoints();
+			Server.gameState.players.get(i).setFruit(null);
 			newPlayers.add(Server.gameState.players.get(i));
 		}
 		Server.gameState.score = 0;
@@ -121,23 +122,37 @@ public class ServerReciveThread extends Thread {
 			}
 		}
 
+		// kigger efter gryde
+		if (fields[nY].charAt(nX) == '1' || fields[nY].charAt(nX) == '2' || fields[nY].charAt(nX) == '3'
+				|| fields[nY].charAt(nX) == '4') {
+			check = false;
+
+			if (Server.gameState.frugtList.get(0).name.equals(Server.gameState.getPlayers().get(id).getFruit())) {
+				Server.taskComplete();
+			}
+			Server.gameState.getPlayers().get(id).setFruit(null);
+			// score på frugt list tjekkes her
+
+			System.out.println("Du går ind i gryden " + id + " Ovi har taget din frugt");
+		}
+
 		return check;
 
 	}
-	
+
 	private void collectFruit(Player player) {
 		String[] fields = Generel.board;
 		int id = player.getId();
 		int nY = Server.gameState.getPlayers().get(id).getYpos();
 		int nX = Server.gameState.getPlayers().get(id).getXpos();
-		if(fields[nY].charAt(nX) == 'p') {
+		if (fields[nY].charAt(nX) == 'p') {
 			player.setFruit(new Fruit("peach"));
-		} else if(fields[nY].charAt(nX) == 'b') {
+		} else if (fields[nY].charAt(nX) == 'b') {
 			player.setFruit(new Fruit("banana"));
 		}
 	}
-	
+
 	private void deliverFruit() {
-		
+
 	}
 }

@@ -19,12 +19,15 @@ public class Server {
 	 */
 
 	private static ArrayList<DataOutputStream> outPutStreamList = new ArrayList<DataOutputStream>();
-	// private GameState gameState = new GameState();
+
 	public static GameState gameState = new GameState(0, new ArrayList<Player>(), new ArrayList<Fruit>(), 0);
+	// Task list
 
 	public static void main(String[] args) throws Exception {
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
+
+		gameState.frugtList = generateTaskList();
 
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
@@ -44,6 +47,26 @@ public class Server {
 			sendGameState();
 
 		}
+
+	}
+
+	public static void taskComplete() {
+		Fruit[] frugter = { new Fruit("banana"), new Fruit("peach") };
+
+		gameState.frugtList.remove(0);
+		gameState.frugtList.add(frugter[Integer.parseInt(Math.random() + "")]);
+		gameState.score += 10;
+	}
+
+	public static ArrayList<Fruit> generateTaskList() {
+		Fruit[] frugter = { new Fruit("banana"), new Fruit("peach") };
+		ArrayList<Fruit> tempList = new ArrayList<Fruit>();
+
+		for (int i = 0; i < gameState.players.size() + 1; i++) {
+			tempList.add(frugter[Integer.parseInt(Math.random() + "")]);
+		}
+
+		return tempList;
 
 	}
 
