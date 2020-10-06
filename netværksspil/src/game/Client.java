@@ -234,7 +234,9 @@ public class Client extends Application {
 
 	// Updates fruitlist
 	public static void updateFruitList() {
+		System.out.println("Vi prøver");
 		System.out.println(Client.gameState.frugtList);
+		System.out.println("vi gøre");
 		String list;
 		if (Client.gameState.frugtList != null) {
 			list = Client.gameState.frugtList.toString();
