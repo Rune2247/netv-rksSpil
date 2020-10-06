@@ -36,8 +36,9 @@ public class GameState {
 
 		}
 		array += "]";
+		fruitArray += "]";
 
-		String json = ("{score: " + this.score + ", " + array + ", fruitList: " + fruitArray + "}");
+		String json = ("{score: " + this.score + ", " + array + ", " + fruitArray + "}");
 		System.out.println("send json: " + json);
 		return json;
 	}
@@ -63,7 +64,7 @@ public class GameState {
 		}
 
 		GameState tempState = new GameState(0, tempList, tempFruit, 0);
-		System.out.println(tempFruit);
+		System.out.println("Modtag json:  " + tempFruit);
 		return tempState;
 	}
 
