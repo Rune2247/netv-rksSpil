@@ -104,10 +104,10 @@ public class Server {
 		} 
 		
 		for (int i = 0; i < players.size(); i++) {
-			spawned.add(new pair(players.get(i).getXpos(), players.get(i).getYpos()));
+			spawned.add(spawnPairs.get(i));
 		}
 		
-		for (int i = 0; i < spawned.size(); i++) {
+		for (int i = 0; i < spawnPairs.size(); i++) {
 			if(!spawned.contains(spawnPairs.get(i))) {
 				return spawnPairs.get(i);
 		}
