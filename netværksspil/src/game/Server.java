@@ -9,7 +9,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javafx.util.Pair;
 
 public class Server {
@@ -27,9 +26,6 @@ public class Server {
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
-		gameState.frugtList = generateTaskList();
-
-		//gameState.frugtList.add(new Fruit("Fisk"));
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
 
@@ -47,6 +43,9 @@ public class Server {
 
 			sendGameState();
 
+			// lav en ny tasklist når ny spiller join
+			generateTaskList();
+
 		}
 
 	}
@@ -55,7 +54,7 @@ public class Server {
 		Fruit[] frugter = { new Fruit("banana"), new Fruit("peach") };
 
 		gameState.frugtList.remove(0);
-		gameState.frugtList.add(frugter[(int) Math.ceil(Math.random())]);
+		gameState.frugtList.add(frugter[(int) Math.round(Math.random())]);
 		gameState.score += 10;
 	}
 
@@ -64,9 +63,10 @@ public class Server {
 		ArrayList<Fruit> tempList = new ArrayList<Fruit>();
 
 		for (int i = 0; i < gameState.players.size() + 1; i++) {
-			tempList.add(frugter[(int) Math.ceil(Math.random())]);
-		}
 
+			tempList.add(frugter[(int) Math.round(Math.random())]);
+		}
+		gameState.frugtList = tempList;
 		return tempList;
 
 	}

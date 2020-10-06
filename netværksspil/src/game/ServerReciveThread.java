@@ -78,6 +78,7 @@ public class ServerReciveThread extends Thread {
 		// Opret nyt gameState med de nye spiller pos
 		// GameState newGameState = new GameState(0, newPlayers);
 		System.out.println("Game Reset");
+		Server.generateTaskList();
 	}
 
 	// Udpakker en comando fra spillerne
@@ -126,9 +127,13 @@ public class ServerReciveThread extends Thread {
 		if (fields[nY].charAt(nX) == '1' || fields[nY].charAt(nX) == '2' || fields[nY].charAt(nX) == '3'
 				|| fields[nY].charAt(nX) == '4') {
 			check = false;
+			if (Server.gameState.getPlayers().get(id).getFruit() != null) {
 
-			if (Server.gameState.frugtList.get(0).name.equals(Server.gameState.getPlayers().get(id).getFruit())) {
-				Server.taskComplete();
+				if (Server.gameState.getPlayers().get(id).getFruit().name
+						.equals(Server.gameState.frugtList.get(0).name)) {
+					Server.taskComplete();
+
+				}
 			}
 			Server.gameState.getPlayers().get(id).setFruit(null);
 			// score på frugt list tjekkes her
