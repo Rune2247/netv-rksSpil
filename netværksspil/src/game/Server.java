@@ -99,9 +99,9 @@ public class Server {
 		spawnPairs.add(new pair(12, 11));
 		spawnPairs.add(new pair(12, 12));
 		
-		if(players.size() == 1) {
+		if(players.size() == 0) {
 			return pairs.get(0);
-		} else if (players.size() > 1 && players.size() < pairs.size()) {
+		} else if (players.size() > 0 && players.size() < pairs.size()) {
 			for (int i = 0; i < pairs.size(); i++) {
 				for (Player player : players) {
 					if(pairs.get(i).x != player.xpos && pairs.get(i).y != player.ypos) {
