@@ -75,10 +75,10 @@ public class Client extends Application {
 			hero_up = new Image(getClass().getResourceAsStream("Image/heroUp.png"), size, size, false, false);
 			hero_down = new Image(getClass().getResourceAsStream("Image/heroDown.png"), size, size, false, false);
 
-			g_1 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Right.png"), size, size, false, false);
-			g_2 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Left.png"), size, size, false, false);
-			g_3 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Right.png"), size, size, false, false);
-			g_4 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Left.png"), size, size, false, false);
+			g_1 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Left.png"), size, size, false, false);
+			g_2 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Right.png"), size, size, false, false);
+			g_3 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Left.png"), size, size, false, false);
+			g_4 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Right.png"), size, size, false, false);
 
 			fields = new Label[20][20];
 			for (int j = 0; j < 20; j++) {
