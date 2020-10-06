@@ -31,6 +31,8 @@ public class ClientRecieveThread extends Thread {
 			Client.players = gameState.getPlayers();
 			Client.score = gameState.getScore();
 			Client.updateAllPlayers();
+			Client.updateScoreTable();
+			Client.updateFruitList();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

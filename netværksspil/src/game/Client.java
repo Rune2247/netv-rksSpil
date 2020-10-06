@@ -41,8 +41,9 @@ public class Client extends Application {
 	public static int id;
 	private static DataOutputStream outToServer;
 
+	public static Text scoreLabel, mazeLabel;
 	private static Label[][] fields;
-	private TextArea scoreList;
+	private static TextArea scoreList;
 
 	// ---- SETS UP THE GAME ----
 	// Sets up GUI and adds listners to the keys
@@ -55,10 +56,10 @@ public class Client extends Application {
 			grid.setVgap(10);
 			grid.setPadding(new Insets(0, 10, 0, 10));
 
-			Text mazeLabel = new Text("Maze:");
+			mazeLabel = new Text("FRUITLIST");
 			mazeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
-			Text scoreLabel = new Text("Score:");
+			scoreLabel = new Text("TID");
 			scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
 			scoreList = new TextArea();
@@ -213,10 +214,36 @@ public class Client extends Application {
 	}
 
 	// Updates the scoreboard
-	public void updateScoreTable() {
+	public static void updateScoreTable() {
+		StringBuffer b = new StringBuffer(100);
+		b.append("Score: " + Client.score + "\r\n");
+		for (Player player : players) {
+			if(player.fruit != null) {
+				b.append(player.name + " : " + player.fruit.name + "\r\n");
+			} else {
+				b.append(player.name + " : " + "......" + "\r\n");
+			}
+			
+		}
 		Platform.runLater(() -> {
-			scoreList.setText("Score: " + Client.score);
+			
+			scoreList.setText(b.toString());
 		});
+	}
+	
+	//Updates fruitlist
+	public static void updateFruitList() {
+		String list;
+		if(Client.gameState.frugtList != null) {
+			list = Client.gameState.frugtList.toString();
+		} else {
+			list = "";
+		Platform.runLater(() -> {
+			
+				mazeLabel.setText(list);
+			});
+		
+		}
 	}
 
 	// Sends the information of a player whenever a player hits a move key.
@@ -246,8 +273,8 @@ public class Client extends Application {
 	// When entered, joins a server.
 	public static void main(String[] args) throws Exception {
 
-		// Making a connection
-		Socket clientSocket = new Socket("10.24.3.237", 12345);
+		// Making a connection - 10.24.3.237
+		Socket clientSocket = new Socket("localhost", 12345);
 		Client.outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
