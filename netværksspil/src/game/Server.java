@@ -27,8 +27,9 @@ public class Server {
 
 		ServerSocket welcomeSocket = new ServerSocket(12345);
 
-		gameState.frugtList = generateTaskList();
+		// gameState.frugtList = generateTaskList();
 
+		gameState.frugtList.add(new Fruit("Fisk"));
 		while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
 

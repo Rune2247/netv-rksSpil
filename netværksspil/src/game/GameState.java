@@ -64,7 +64,6 @@ public class GameState {
 		}
 
 		GameState tempState = new GameState(0, tempList, tempFruit, 0);
-		System.out.println("Modtag json:  " + tempFruit);
 		return tempState;
 	}
 

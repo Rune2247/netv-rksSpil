@@ -151,7 +151,8 @@ public class Client extends Application {
 
 			updateScoreTable();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e + " FEJL ER HER");
+
 		}
 	}
 
@@ -218,32 +219,32 @@ public class Client extends Application {
 		StringBuffer b = new StringBuffer(100);
 		b.append("Score: " + Client.score + "\r\n");
 		for (Player player : players) {
-			if(player.fruit != null) {
+			if (player.fruit != null) {
 				b.append(player.name + " : " + player.fruit.name + "\r\n");
 			} else {
 				b.append(player.name + " : " + "......" + "\r\n");
 			}
-			
+
 		}
 		Platform.runLater(() -> {
-			
+
 			scoreList.setText(b.toString());
 		});
 	}
-	
-	//Updates fruitlist
+
+	// Updates fruitlist
 	public static void updateFruitList() {
+		System.out.println(Client.gameState.frugtList);
 		String list;
-		if(Client.gameState.frugtList != null) {
+		if (Client.gameState.frugtList != null) {
 			list = Client.gameState.frugtList.toString();
 		} else {
 			list = "";
 		}
 		Platform.runLater(() -> {
 			System.out.println("Fruitlist update");
-				mazeLabel.setText(list);
-			
-		
+			mazeLabel.setText(list);
+
 		});
 	}
 
