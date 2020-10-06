@@ -238,12 +238,13 @@ public class Client extends Application {
 			list = Client.gameState.frugtList.toString();
 		} else {
 			list = "";
-		Platform.runLater(() -> {
-			
-				mazeLabel.setText(list);
-			});
-		
 		}
+		Platform.runLater(() -> {
+			System.out.println("Fruitlist update");
+				mazeLabel.setText(list);
+			
+		
+		});
 	}
 
 	// Sends the information of a player whenever a player hits a move key.
