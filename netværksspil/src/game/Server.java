@@ -58,7 +58,6 @@ public class Server {
 		for (int i = 0; i < outPutStreamList.size(); i++) {
 			try {
 				outPutStreamList.get(i).writeBytes(json + "\n");
-				System.out.println("Der er fiksere");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

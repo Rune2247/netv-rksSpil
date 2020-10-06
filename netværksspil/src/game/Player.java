@@ -51,6 +51,10 @@ public class Player {
 		return id;
 	}
 
+	public void resetPoints() {
+		point = 0;
+	}
+
 	public String toString() {
 		return name + " " + point + " " + xpos + " " + ypos + " " + direction + "         ";
 	}
