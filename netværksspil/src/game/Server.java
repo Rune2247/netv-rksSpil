@@ -98,50 +98,33 @@ public class Server {
 		spawnPairs.add(new pair(12, 10));
 		spawnPairs.add(new pair(12, 11));
 		spawnPairs.add(new pair(12, 12));
-		
-		if(players.size() == 0) {
-			return pairs.get(0);
-		} else if (players.size() > 0 && players.size() < pairs.size()) {
-			for (int i = 0; i < pairs.size(); i++) {
+
+		if (players.size() == 0) {
+			return spawnPairs.get(0);
+		} else if (players.size() > 0 && players.size() < spawnPairs.size()) {
+			for (int i = 0; i < spawnPairs.size(); i++) {
 				for (Player player : players) {
-					if(pairs.get(i).x != player.xpos && pairs.get(i).y != player.ypos) {
-						return pairs.get(i);
+					if (spawnPairs.get(i).x != player.xpos && spawnPairs.get(i).y != player.ypos) {
+						return spawnPairs.get(i);
 					}
 				}
 			}
-		} 
-		
-		return new pair(2,2);
-		
+		}
+
+		return new pair(2, 2);
 
 		/*
-		if (pairs.size() == 0) {
-			return spawnPairs.get(0);
-		} else if (pairs.size() == 1) {
-			return spawnPairs.get(1);
-		} else if (pairs.size() == 2) {
-			return spawnPairs.get(2);
-		} else if (pairs.size() == 3) {
-			return spawnPairs.get(3);
-		} else if (pairs.size() == 4) {
-			return spawnPairs.get(4);
-		} else if (pairs.size() == 5) {
-			return spawnPairs.get(5);
-		} else if (pairs.size() == 6) {
-			return spawnPairs.get(6);
-		} else if (pairs.size() == 7) {
-			return spawnPairs.get(7);
-		} else if (pairs.size() == 8) {
-			return spawnPairs.get(8);
-		} else if (pairs.size() == 9) {
-			return spawnPairs.get(9);
-		} else if (pairs.size() == 10) {
-			return spawnPairs.get(10);
-		} else if (pairs.size() == 11) {
-			return spawnPairs.get(11);
-		} else
-			return pairs.get(12);
-			*/
+		 * if (pairs.size() == 0) { return spawnPairs.get(0); } else if (pairs.size() ==
+		 * 1) { return spawnPairs.get(1); } else if (pairs.size() == 2) { return
+		 * spawnPairs.get(2); } else if (pairs.size() == 3) { return spawnPairs.get(3);
+		 * } else if (pairs.size() == 4) { return spawnPairs.get(4); } else if
+		 * (pairs.size() == 5) { return spawnPairs.get(5); } else if (pairs.size() == 6)
+		 * { return spawnPairs.get(6); } else if (pairs.size() == 7) { return
+		 * spawnPairs.get(7); } else if (pairs.size() == 8) { return spawnPairs.get(8);
+		 * } else if (pairs.size() == 9) { return spawnPairs.get(9); } else if
+		 * (pairs.size() == 10) { return spawnPairs.get(10); } else if (pairs.size() ==
+		 * 11) { return spawnPairs.get(11); } else return pairs.get(12);
+		 */
 
 	}
 
