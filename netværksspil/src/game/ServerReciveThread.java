@@ -93,6 +93,7 @@ public class ServerReciveThread extends Thread {
 			} else {
 				System.out.println(jo.getInt("id") + " Må ikke rykke!");
 			}
+			collectFruit(Server.gameState.getPlayers().get(i));
 		}
 
 	}
@@ -122,5 +123,21 @@ public class ServerReciveThread extends Thread {
 
 		return check;
 
+	}
+	
+	private void collectFruit(Player player) {
+		String[] fields = Generel.board;
+		int id = player.getId();
+		int nY = Server.gameState.getPlayers().get(id).getYpos();
+		int nX = Server.gameState.getPlayers().get(id).getXpos();
+		if(fields[nY].charAt(nX) == 'p') {
+			player.setFruit(new Fruit("peach"));
+		} else if(fields[nY].charAt(nX) == 'b') {
+			player.setFruit(new Fruit("banana"));
+		}
+	}
+	
+	private void deliverFruit() {
+		
 	}
 }
