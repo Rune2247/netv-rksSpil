@@ -54,7 +54,7 @@ public class Server {
 		Fruit[] frugter = { new Fruit("banana"), new Fruit("peach") };
 
 		gameState.frugtList.remove(0);
-		gameState.frugtList.add(frugter[Integer.parseInt(Math.random() + "")]);
+		gameState.frugtList.add(frugter[(int) Math.ceil(Math.random())]);
 		gameState.score += 10;
 	}
 
@@ -63,7 +63,7 @@ public class Server {
 		ArrayList<Fruit> tempList = new ArrayList<Fruit>();
 
 		for (int i = 0; i < gameState.players.size() + 1; i++) {
-			tempList.add(frugter[Integer.parseInt(Math.random() + "")]);
+			tempList.add(frugter[(int) Math.ceil(Math.random())]);
 		}
 
 		return tempList;
