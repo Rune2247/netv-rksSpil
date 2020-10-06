@@ -41,7 +41,7 @@ public class ServerReciveThread extends Thread {
 				return;
 			}
 			// Hvis "reset" genstart spillet
-			if (modifiedSentence.equals("reset")) {
+			if (modifiedSentence.equals("r")) {
 				Server.gameState = reset();
 				Server.sendGameState();
 				// Break
@@ -60,14 +60,19 @@ public class ServerReciveThread extends Thread {
 
 	private GameState reset() {
 		ArrayList<Player> newPlayers = Server.gameState.getPlayers();
+		System.out.println(newPlayers.toString() + "STRIIRIIRIRIRIRIRI");
 		// Setter spillere op
-		for (int i = 0; i < Server.gameState.getPlayers().size(); i++) {
-			pair nSpawn = Server.getFreeSpawn(Server.gameState.getPlayers());
-			newPlayers.get(i).xpos = nSpawn.x;
-			newPlayers.get(i).ypos = nSpawn.y;
+
+		pair nSpawn;
+		for (int i = 0; i < newPlayers.size(); i++) {
+			nSpawn = Server.getFreeSpawn(newPlayers);
+			System.out.println("New pos: " + nSpawn.x + ", " + nSpawn.y);
+
+			newPlayers.get(i).setXpos(nSpawn.getX());
+			newPlayers.get(i).setYpos(nSpawn.getY());
 			newPlayers.get(i).resetPoints();
 		}
-
+		System.out.println("FISK");
 		// Opret nyt gameState med de nye spiller pos
 		GameState newGameState = new GameState(0, newPlayers);
 		System.out.println("Game Reset");
@@ -96,8 +101,6 @@ public class ServerReciveThread extends Thread {
 		boolean check = true;
 		String[] fields = Generel.board;
 		int id = joo.getInt("id");
-		int oY = Server.gameState.getPlayers().get(id).getYpos();
-		int oX = Server.gameState.getPlayers().get(id).getXpos();
 		int nY = Server.gameState.getPlayers().get(id).getYpos() + joo.getInt("ypos");
 		int nX = Server.gameState.getPlayers().get(id).getXpos() + joo.getInt("xpos");
 
