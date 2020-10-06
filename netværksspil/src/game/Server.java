@@ -86,37 +86,35 @@ public class Server {
 		// Finder tom plads i spawn
 		ArrayList<pair> pairs = new ArrayList<>();
 		ArrayList<pair> spawnPairs = new ArrayList<>();
-		pair p1 = new pair(9, 9);
-		pair p2 = new pair(9, 10);
-		pair p3 = new pair(9, 11);
-		pair p4 = new pair(9, 12);
-		pair p5 = new pair(10, 9);
-		pair p6 = new pair(10, 12);
-		pair p7 = new pair(11, 9);
-		pair p8 = new pair(11, 12);
-		pair p9 = new pair(12, 9);
-		pair p10 = new pair(12, 10);
-		pair p11 = new pair(12, 11);
-		pair p12 = new pair(12, 12);
-		spawnPairs.add(p1);
-		spawnPairs.add(p2);
-		spawnPairs.add(p3);
-		spawnPairs.add(p4);
-		spawnPairs.add(p5);
-		spawnPairs.add(p6);
-		spawnPairs.add(p7);
-		spawnPairs.add(p8);
-		spawnPairs.add(p9);
-		spawnPairs.add(p10);
-		spawnPairs.add(p11);
-		spawnPairs.add(p12);
+		spawnPairs.add(new pair(9, 9));
+		spawnPairs.add(new pair(9, 10));
+		spawnPairs.add(new pair(9, 11));
+		spawnPairs.add(new pair(9, 12));
+		spawnPairs.add(new pair(10, 9));
+		spawnPairs.add(new pair(10, 12));
+		spawnPairs.add(new pair(11, 9));
+		spawnPairs.add(new pair(11, 12));
+		spawnPairs.add(new pair(12, 9));
+		spawnPairs.add(new pair(12, 10));
+		spawnPairs.add(new pair(12, 11));
+		spawnPairs.add(new pair(12, 12));
+		
+		if(players.size() == 1) {
+			return pairs.get(0);
+		} else if (players.size() > 1 && players.size() < pairs.size()) {
+			for (int i = 0; i < pairs.size(); i++) {
+				for (Player player : players) {
+					if(pairs.get(i).x != player.xpos && pairs.get(i).y != player.ypos) {
+						return pairs.get(i);
+					}
+				}
+			}
+		} 
+		
+		return new pair(2,2);
+		
 
-		for (int i = 0; i < players.size(); i++) {
-			pair temp = new pair(players.get(i).getXpos(), players.get(i).getYpos());
-			pairs.add(temp);
-
-		}
-
+		/*
 		if (pairs.size() == 0) {
 			return spawnPairs.get(0);
 		} else if (pairs.size() == 1) {
@@ -143,6 +141,7 @@ public class Server {
 			return spawnPairs.get(11);
 		} else
 			return pairs.get(12);
+			*/
 
 	}
 
