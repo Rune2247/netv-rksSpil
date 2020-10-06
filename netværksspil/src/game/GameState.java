@@ -32,7 +32,7 @@ public class GameState {
 
 		}
 		for (Fruit fruit : frugtList) {
-			fruitArray += "{name: \"" + fruit.name + "\"},";
+			fruitArray += "{name: \"" + fruit.name + "\"" + ", xPos: " + fruit.xPos + ", yPos: " + fruit.yPos + "},";
 
 		}
 		array += "]";
@@ -60,7 +60,7 @@ public class GameState {
 		ArrayList<Fruit> tempFruit = new ArrayList<>();
 		for (int i = 0; i < jf.length(); i++) {
 			JSONObject jp = jf.getJSONObject(i);
-			Fruit f = new Fruit(jp.getString("name"));
+			Fruit f = new Fruit(jp.getString("name"), jp.getInt("xPos"), jp.getInt("yPos"));
 		}
 
 		GameState tempState = new GameState(0, tempList, tempFruit, 0);

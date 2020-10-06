@@ -33,6 +33,7 @@ public class Client extends Application {
 	public static Image image_banana;
 	public static Image image_peach;
 	public static Image hero_right, hero_left, hero_up, hero_down;
+	public static Image g_1, g_2, g_3, g_4;
 
 	public static Player me;
 	public static List<Player> players = new ArrayList<Player>();
@@ -74,6 +75,11 @@ public class Client extends Application {
 			hero_up = new Image(getClass().getResourceAsStream("Image/heroUp.png"), size, size, false, false);
 			hero_down = new Image(getClass().getResourceAsStream("Image/heroDown.png"), size, size, false, false);
 
+			g_1 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Right.png"), size, size, false, false);
+			g_2 = new Image(getClass().getResourceAsStream("Image/Pot_Up_Left.png"), size, size, false, false);
+			g_3 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Right.png"), size, size, false, false);
+			g_4 = new Image(getClass().getResourceAsStream("Image/Pot_Down_Left.png"), size, size, false, false);
+
 			fields = new Label[20][20];
 			for (int j = 0; j < 20; j++) {
 				for (int i = 0; i < 20; i++) {
@@ -89,6 +95,19 @@ public class Client extends Application {
 						break;
 					case 'p':
 						fields[i][j] = new Label("", new ImageView(image_peach));
+						break;
+
+					case '1':
+						fields[i][j] = new Label("", new ImageView(g_1));
+						break;
+					case '2':
+						fields[i][j] = new Label("", new ImageView(g_2));
+						break;
+					case '3':
+						fields[i][j] = new Label("", new ImageView(g_3));
+						break;
+					case '4':
+						fields[i][j] = new Label("", new ImageView(g_4));
 						break;
 					default:
 						throw new Exception("Illegal field value: " + Generel.board[j].charAt(i));

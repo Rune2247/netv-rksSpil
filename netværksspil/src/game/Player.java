@@ -6,6 +6,7 @@ public class Player {
 	int xpos;
 	int ypos;
 	int point;
+	Fruit fruit;
 
 	String direction;
 
@@ -16,7 +17,16 @@ public class Player {
 		this.ypos = ypos;
 		this.direction = direction;
 		this.point = point;
+		this.fruit = null;
 
+	}
+
+	public void setFruit(Fruit fruit) {
+		this.fruit = fruit;
+	}
+
+	public Fruit getFruit() {
+		return fruit;
 	}
 
 	public int getXpos() {
