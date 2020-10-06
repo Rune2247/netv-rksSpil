@@ -84,8 +84,8 @@ public class Server {
 	{
 
 		// Finder tom plads i spawn
-		ArrayList<pair> pairs = new ArrayList<>();
 		ArrayList<pair> spawnPairs = new ArrayList<>();
+		ArrayList<pair> spawned = new ArrayList<>();
 		spawnPairs.add(new pair(9, 9));
 		spawnPairs.add(new pair(9, 10));
 		spawnPairs.add(new pair(9, 11));
@@ -101,14 +101,18 @@ public class Server {
 
 		if (players.size() == 0) {
 			return spawnPairs.get(0);
-		} else if (players.size() > 0 && players.size() < spawnPairs.size()) {
-			for (int i = 0; i < spawnPairs.size(); i++) {
-				for (Player player : players) {
-					if (spawnPairs.get(i).x != player.xpos && spawnPairs.get(i).y != player.ypos) {
-						return spawnPairs.get(i);
-					}
-				}
-			}
+		} 
+		
+		for (int i = 0; i < players.size(); i++) {
+			spawned.add(new pair(players.get(i).getXpos(), players.get(i).getYpos()));
+		}
+		
+		for (int i = 0; i < spawned.size(); i++) {
+			if(!spawned.contains(spawnPairs.get(i))) {
+				return spawnPairs.get(i);
+		}
+		
+		
 		}
 
 		return new pair(2, 2);
