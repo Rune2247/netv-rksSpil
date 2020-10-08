@@ -70,7 +70,7 @@ public class ServerReciveThread extends Thread {
 			Server.gameState.players.get(i).setXpos(nSpawn.getX());
 			Server.gameState.players.get(i).setYpos(nSpawn.getY());
 			Server.gameState.players.get(i).resetPoints();
-			Server.gameState.players.get(i).setFruit(null);
+			Server.gameState.players.get(i).setFruit("ingen");
 			newPlayers.add(Server.gameState.players.get(i));
 		}
 		Server.gameState.score = 0;
@@ -128,13 +128,13 @@ public class ServerReciveThread extends Thread {
 			check = false;
 			if (Server.gameState.getPlayers().get(id).getFruit() != null) {
 
-				if (Server.gameState.getPlayers().get(id).getFruit().name
+				if (Server.gameState.getPlayers().get(id).fruit
 						.equals(Server.gameState.frugtList.get(0).name)) {
 					Server.taskComplete();
 
 				}
 			}
-			Server.gameState.getPlayers().get(id).setFruit(null);
+			Server.gameState.getPlayers().get(id).setFruit("ingen");
 			// score på frugt list tjekkes her
 
 			System.out.println("Du går ind i gryden " + id + " Ovi har taget din frugt");
@@ -150,9 +150,9 @@ public class ServerReciveThread extends Thread {
 		int nY = Server.gameState.getPlayers().get(id).getYpos();
 		int nX = Server.gameState.getPlayers().get(id).getXpos();
 		if (fields[nY].charAt(nX) == 'p') {
-			player.setFruit(new Fruit("peach"));
+			player.setFruit("peach");
 		} else if (fields[nY].charAt(nX) == 'b') {
-			player.setFruit(new Fruit("banana"));
+			player.setFruit("banana");
 		}
 	}
 

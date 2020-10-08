@@ -28,8 +28,7 @@ public class GameState {
 		// array = "players: ";
 		for (Player player : players) {
 			array += "{id: " + player.id + ", name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: "
-					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + "},";
-
+					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + ", fruit: \"" + player.fruit + "\"},";
 		}
 		for (Fruit fruit : frugtList) {
 			fruitArray += "{name: \"" + fruit.name + "\"" + "},";
@@ -54,6 +53,7 @@ public class GameState {
 
 			Player p = new Player(jp.getInt("id"), jp.getString("name"), jp.getInt("xpos"), jp.getInt("ypos"),
 					jp.getString("direction"), jp.getInt("point"));
+			p.setFruit(jp.getString("fruit"));
 			tempList.add(p);
 
 		}

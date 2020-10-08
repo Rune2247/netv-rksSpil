@@ -220,9 +220,11 @@ public class Client extends Application {
 		b.append("Score: " + Client.score + "\r\n");
 		for (Player player : players) {
 			if (player.fruit != null) {
-				b.append(player.name + " : " + player.fruit.name + "\r\n");
+				b.append(player.name + " : " + player.fruit + "\r\n");
+				
 			} else {
 				b.append(player.name + " : " + "......" + "\r\n");
+				System.out.println(player.name + " has " + player.fruit);
 			}
 
 		}

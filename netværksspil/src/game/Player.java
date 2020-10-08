@@ -6,7 +6,7 @@ public class Player {
 	int xpos;
 	int ypos;
 	int point;
-	Fruit fruit;
+	String fruit;
 
 	String direction;
 
@@ -17,15 +17,15 @@ public class Player {
 		this.ypos = ypos;
 		this.direction = direction;
 		this.point = point;
-		this.fruit = null;
+		this.fruit = "ingen";
 
 	}
 
-	public void setFruit(Fruit fruit) {
+	public void setFruit(String fruit) {
 		this.fruit = fruit;
 	}
 
-	public Fruit getFruit() {
+	public String getFruit() {
 		return fruit;
 	}
 
