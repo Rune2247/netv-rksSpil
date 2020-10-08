@@ -38,7 +38,7 @@ public class Server {
 			outToClient.writeBytes(newPlayer(gameState, newP) + "\n");
 
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
-			ServerSendThread serverSendThread = new ServerSendThread(200);
+			ServerSendThread serverSendThread = new ServerSendThread(2000000);
 
 			serverRecive.start();
 			serverSendThread.start();

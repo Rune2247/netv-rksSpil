@@ -19,6 +19,6 @@ public class ServerSendThread extends Thread {
 
 	private void tid() {
 		startTid = startTid - System.currentTimeMillis();
-		System.out.println(startTid);
+
 	}
 }
