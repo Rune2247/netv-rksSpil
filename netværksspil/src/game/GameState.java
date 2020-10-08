@@ -63,8 +63,11 @@ public class GameState {
 			Fruit f = new Fruit(jp.getString("name"));
 			tempFruit.add(f);
 		}
+		
+		int score = jo.getInt("score");
+		
 
-		GameState tempState = new GameState(0, tempList, tempFruit, 0);
+		GameState tempState = new GameState(score, tempList, tempFruit, 0);
 		return tempState;
 	}
 
