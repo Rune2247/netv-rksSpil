@@ -181,12 +181,13 @@ public class Client extends Application {
 	// If a player stands on anothers players last position, it dosent write floor
 	// on this position.
 	public static void updatePlayerOnScreen(Player player) {
-		//System.out.println(player.toString());
+		// System.out.println(player.toString());
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
 				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos)) {
 					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_floor));
 				}
+
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_right));
 			}
 			;
@@ -207,6 +208,7 @@ public class Client extends Application {
 			if (player.direction.equals("down")) {
 				if (checkIfFieldIsPlayer(player.xpos, player.ypos - 1)) {
 					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_floor));
+
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_down));
 			}
@@ -221,7 +223,7 @@ public class Client extends Application {
 		for (Player player : players) {
 			if (player.fruit != null) {
 				b.append(player.name + " : " + player.fruit + "\r\n");
-				
+
 			} else {
 				b.append(player.name + " : " + "......" + "\r\n");
 				System.out.println(player.name + " has " + player.fruit);
@@ -232,6 +234,9 @@ public class Client extends Application {
 
 			scoreList.setText(b.toString());
 		});
+
+		// Updater tid
+		scoreLabel.setText("Time: " + gameState.time);
 	}
 
 	// Updates fruitlist

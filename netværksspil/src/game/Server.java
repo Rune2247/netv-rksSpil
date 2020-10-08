@@ -41,10 +41,11 @@ public class Server {
 			ServerSendThread serverSendThread = new ServerSendThread(2000);
 
 			serverRecive.start();
-			serverSendThread.start();
+			// serverSendThread.start();
 
 			// lav en ny tasklist når ny spiller join
 			generateTaskList();
+			sendGameState();
 
 		}
 

@@ -28,7 +28,8 @@ public class GameState {
 		// array = "players: ";
 		for (Player player : players) {
 			array += "{id: " + player.id + ", name: \"" + player.name + "\", xpos: " + player.xpos + ", ypos: "
-					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + ", fruit: \"" + player.fruit + "\"},";
+					+ player.ypos + ", direction: \"" + player.direction + "\", point: " + player.point + ", fruit: \""
+					+ player.fruit + "\"},";
 		}
 		for (Fruit fruit : frugtList) {
 			fruitArray += "{name: \"" + fruit.name + "\"" + "},";
@@ -38,7 +39,7 @@ public class GameState {
 		fruitArray += "]";
 
 		String json = ("{score: " + this.score + ", " + array + ", " + fruitArray + "}");
-		//System.out.println("send json: " + json);
+		// System.out.println("send json: " + json);
 		return json;
 	}
 
@@ -63,11 +64,11 @@ public class GameState {
 			Fruit f = new Fruit(jp.getString("name"));
 			tempFruit.add(f);
 		}
-		
-		int score = jo.getInt("score");
-		
 
-		GameState tempState = new GameState(score, tempList, tempFruit, 0);
+		int score = jo.getInt("score");
+		double time = 0;
+
+		GameState tempState = new GameState(score, tempList, tempFruit, time);
 		return tempState;
 	}
 

@@ -43,6 +43,8 @@ public class ServerReciveThread extends Thread {
 			if (modifiedSentence.equals("r")) {
 				// Clear playerlisten i nu værende gameState
 				reset();
+
+				// SEND______________________________________
 				Server.sendGameState();
 				// Break
 				return;
@@ -51,6 +53,7 @@ public class ServerReciveThread extends Thread {
 			System.out.println(modifiedSentence);
 			udPakComando(modifiedSentence);
 
+			// SEND___________________________________________
 			Server.sendGameState();
 
 		} catch (IOException e) {
@@ -71,6 +74,7 @@ public class ServerReciveThread extends Thread {
 			Server.gameState.players.get(i).setYpos(nSpawn.getY());
 			Server.gameState.players.get(i).resetPoints();
 			Server.gameState.players.get(i).setFruit("ingen");
+
 			newPlayers.add(Server.gameState.players.get(i));
 		}
 		Server.gameState.score = 0;
@@ -128,8 +132,7 @@ public class ServerReciveThread extends Thread {
 			check = false;
 			if (Server.gameState.getPlayers().get(id).getFruit() != null) {
 
-				if (Server.gameState.getPlayers().get(id).fruit
-						.equals(Server.gameState.frugtList.get(0).name)) {
+				if (Server.gameState.getPlayers().get(id).fruit.equals(Server.gameState.frugtList.get(0).name)) {
 					Server.taskComplete();
 
 				}
@@ -156,7 +159,4 @@ public class ServerReciveThread extends Thread {
 		}
 	}
 
-	private void deliverFruit() {
-
-	}
 }

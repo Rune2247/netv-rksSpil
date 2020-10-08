@@ -19,9 +19,9 @@ public class ServerSendThread extends Thread {
 
 	private void tid() {
 		try {
-			Thread.sleep(50);
-			startTid = startTid - 0.5;
-			//System.out.println(startTid);
+			Thread.sleep(10);
+			startTid = startTid - 0.1;
+			// System.out.println(startTid);
 			Server.gameState.time = startTid;
 			Server.sendGameState();
 		} catch (InterruptedException e) {
