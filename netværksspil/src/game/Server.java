@@ -38,7 +38,7 @@ public class Server {
 			outToClient.writeBytes(newPlayer(gameState, newP) + "\n");
 
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
-			ServerSendThread serverSendThread = new ServerSendThread(2000000);
+			ServerSendThread serverSendThread = new ServerSendThread(2000);
 
 			serverRecive.start();
 			serverSendThread.start();
@@ -46,7 +46,6 @@ public class Server {
 			// lav en ny tasklist når ny spiller join
 			generateTaskList();
 
-			sendGameState();
 		}
 
 	}
