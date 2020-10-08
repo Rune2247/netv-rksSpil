@@ -38,14 +38,15 @@ public class Server {
 			outToClient.writeBytes(newPlayer(gameState, newP) + "\n");
 
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
+			ServerSendThread serverSendThread = new ServerSendThread(200);
 
 			serverRecive.start();
-
-			sendGameState();
+			serverSendThread.start();
 
 			// lav en ny tasklist når ny spiller join
 			generateTaskList();
 
+			sendGameState();
 		}
 
 	}
@@ -139,19 +140,6 @@ public class Server {
 		}
 
 		return new pair(2, 2);
-
-		/*
-		 * if (pairs.size() == 0) { return spawnPairs.get(0); } else if (pairs.size() ==
-		 * 1) { return spawnPairs.get(1); } else if (pairs.size() == 2) { return
-		 * spawnPairs.get(2); } else if (pairs.size() == 3) { return spawnPairs.get(3);
-		 * } else if (pairs.size() == 4) { return spawnPairs.get(4); } else if
-		 * (pairs.size() == 5) { return spawnPairs.get(5); } else if (pairs.size() == 6)
-		 * { return spawnPairs.get(6); } else if (pairs.size() == 7) { return
-		 * spawnPairs.get(7); } else if (pairs.size() == 8) { return spawnPairs.get(8);
-		 * } else if (pairs.size() == 9) { return spawnPairs.get(9); } else if
-		 * (pairs.size() == 10) { return spawnPairs.get(10); } else if (pairs.size() ==
-		 * 11) { return spawnPairs.get(11); } else return pairs.get(12);
-		 */
 
 	}
 

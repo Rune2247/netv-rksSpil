@@ -24,7 +24,6 @@ public class ServerReciveThread extends Thread {
 	public void run() {
 		while (luk) {
 			modtag();
-
 		}
 
 	}
