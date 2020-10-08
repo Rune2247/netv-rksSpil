@@ -38,7 +38,7 @@ public class GameState {
 		fruitArray += "]";
 
 		String json = ("{score: " + this.score + ", " + array + ", " + fruitArray + "}");
-		System.out.println("send json: " + json);
+		//System.out.println("send json: " + json);
 		return json;
 	}
 

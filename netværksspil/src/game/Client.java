@@ -181,7 +181,7 @@ public class Client extends Application {
 	// If a player stands on anothers players last position, it dosent write floor
 	// on this position.
 	public static void updatePlayerOnScreen(Player player) {
-		System.out.println(player.toString());
+		//System.out.println(player.toString());
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
 				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos)) {
@@ -243,7 +243,6 @@ public class Client extends Application {
 			list = "";
 		}
 		Platform.runLater(() -> {
-			System.out.println("Fruitlist update");
 			mazeLabel.setText(list);
 
 		});
