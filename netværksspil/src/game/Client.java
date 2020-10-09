@@ -174,6 +174,20 @@ public class Client extends Application {
 		}
 		return true;
 	}
+	
+	//Checks if a position is a wall.
+	public static boolean checkIfFieldIsWall(int x, int y) {
+		if(Generel.board[x].charAt(y) == 'w') {
+			return false;
+		} else return true;
+	}
+	
+	//Checks whats on the board
+	public static char checkWhatsOnBoard(int x, int y) {
+		char tegn;
+		tegn = Generel.board[x].charAt(y);
+		return tegn;
+	}
 
 	// Takes in a player and writes it image on the screen.
 	// The method uses "checkIfFieldIsPlayer" to check if the last position is a
@@ -184,29 +198,50 @@ public class Client extends Application {
 		//System.out.println(player.toString());
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
-				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos)) {
+				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos) && checkWhatsOnBoard(player.xpos -1, player.ypos) == ' ') {
+					System.out.println("Højre gulv");
 					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_floor));
+				} else if(checkWhatsOnBoard(player.xpos -1, player.ypos) == 'p') {
+					System.out.println("højre peach");
+					fields[player.xpos -1][player.ypos].setGraphic(new ImageView(image_peach));
+				} else if(checkWhatsOnBoard(player.xpos -1, player.ypos) == 'b') {
+					System.out.println("Højre banana");
+					fields[player.xpos -1][player.ypos].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_right));
 			}
 			;
+			
 			if (player.direction.equals("left")) {
-				if (checkIfFieldIsPlayer(player.xpos + 1, player.ypos)) {
+				if (checkIfFieldIsPlayer(player.xpos + 1, player.ypos) && checkWhatsOnBoard(player.xpos +1, player.ypos) == ' ') {
 					fields[player.xpos + 1][player.ypos].setGraphic(new ImageView(image_floor));
+				} else if(checkWhatsOnBoard(player.xpos +1, player.ypos) == 'p') {
+					fields[player.xpos +1][player.ypos].setGraphic(new ImageView(image_peach));
+				} else if(checkWhatsOnBoard(player.xpos +1, player.ypos) == 'b') {
+					fields[player.xpos +1][player.ypos].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_left));
 			}
 			;
+			
 			if (player.direction.equals("up")) {
-				if (checkIfFieldIsPlayer(player.xpos, player.ypos + 1)) {
+				if (checkIfFieldIsPlayer(player.xpos, player.ypos + 1) && checkWhatsOnBoard(player.xpos, player.ypos + 1) == ' ') {
 					fields[player.xpos][player.ypos + 1].setGraphic(new ImageView(image_floor));
+				} else if(checkWhatsOnBoard(player.xpos, player.ypos  + 1) == 'p') {
+					fields[player.xpos][player.ypos  + 1].setGraphic(new ImageView(image_peach));
+				} else if(checkWhatsOnBoard(player.xpos, player.ypos  + 1) == 'b') {
+					fields[player.xpos][player.ypos  + 1].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_up));
 			}
 			;
 			if (player.direction.equals("down")) {
-				if (checkIfFieldIsPlayer(player.xpos, player.ypos - 1)) {
+				if (checkIfFieldIsPlayer(player.xpos, player.ypos - 1) && checkWhatsOnBoard(player.xpos +1, player.ypos-1) == ' ') {
 					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_floor));
+				}  else if(checkWhatsOnBoard(player.xpos, player.ypos  - 1) == 'p') {
+					fields[player.xpos][player.ypos  - 1].setGraphic(new ImageView(image_peach));
+				} else if(checkWhatsOnBoard(player.xpos, player.ypos  - 1) == 'b') {
+					fields[player.xpos][player.ypos  - 1].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_down));
 			}
