@@ -44,8 +44,9 @@ public class ServerReciveThread extends Thread {
 				// Clear playerlisten i nu værende gameState
 
 				reset();
-				Server.sendReset();
 				Server.sendGameState();
+				Server.sendReset();
+				
 				// Break
 				return;
 			}
