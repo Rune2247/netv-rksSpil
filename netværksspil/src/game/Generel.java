@@ -13,7 +13,7 @@ public class Generel {
 	  "w ww     w  bb  ww w",
 	  "w  w w w w ww w w  w",
 	  "ww ww          b w w",
-	  "w wwwww  12 w w w  w",
+	  "w  wwww  12 w w w  w",
 	  "w   p    34 ww   w w", 
 	  "wwww w w    w ww   w",
 	  "w   ww ww www   ww w",

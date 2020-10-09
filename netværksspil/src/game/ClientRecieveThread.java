@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+import org.json.JSONString;
+
 public class ClientRecieveThread extends Thread {
 
 	private Socket theSocket;
@@ -27,7 +30,13 @@ public class ClientRecieveThread extends Thread {
 	public void recieveData() {
 		try {
 			String recived = inFromServer.readLine();
-			Client.gameState = GameState.modtagGameState(recived);
+			if (recived.charAt(1) == 't') {
+				System.out.println(recived);
+				JSONObject jo = new JSONObject(recived);
+				Client.gameState.time = jo.getDouble("tid");
+			} else {
+				Client.gameState = GameState.modtagGameState(recived);
+			}
 			Client.players = Client.gameState.getPlayers();
 			Client.score = Client.gameState.getScore();
 			Client.updateAllPlayers();
