@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import javafx.util.Pair;
+import java.util.concurrent.TimeUnit;
 
 public class Server {
 
@@ -19,7 +19,7 @@ public class Server {
 
 	private static ArrayList<DataOutputStream> outPutStreamList = new ArrayList<DataOutputStream>();
 
-	public static GameState gameState = new GameState(0, new ArrayList<Player>(), new ArrayList<Fruit>(), 0);
+	public static GameState gameState = new GameState(0, new ArrayList<Player>(), new ArrayList<Fruit>(), 60);
 	// Task list
 
 	public static void main(String[] args) throws Exception {
@@ -38,13 +38,13 @@ public class Server {
 			outToClient.writeBytes(newPlayer(gameState, newP) + "\n");
 
 			ServerReciveThread serverRecive = new ServerReciveThread(inFromClient, connectionSocket);
-			ServerSendThread serverSendThread = new ServerSendThread(2000);
 
 			serverRecive.start();
-			serverSendThread.start();
 
 			// lav en ny tasklist når ny spiller join
 			generateTaskList();
+
+			sendGameState();
 
 		}
 
