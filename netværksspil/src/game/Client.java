@@ -336,7 +336,7 @@ public class Client extends Application {
 	public static void main(String[] args) throws Exception {
 
 		// Making a connection - 10.24.3.237
-		Socket clientSocket = new Socket("localhost", 12345);
+		Socket clientSocket = new Socket("10.4.3.29", 12345);
 		Client.outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
