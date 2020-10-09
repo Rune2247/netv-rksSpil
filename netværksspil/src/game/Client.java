@@ -185,11 +185,11 @@ public class Client extends Application {
 		int ypos = player.ypos;
 		Platform.runLater(() -> {
 			if (player.direction.equals("right")) {
-				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos) && Generel.board[ypos].charAt(xpos -1) == ' ') {
+				if (checkIfFieldIsPlayer(player.xpos - 1, player.ypos) && Generel.board[ypos].charAt(xpos - 1) == ' ') {
 					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_floor));
-				} else if (Generel.board[ypos].charAt(xpos -1) == 'b') {
+				} else if (Generel.board[ypos].charAt(xpos - 1) == 'b') {
 					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_banana));
-				} else if (Generel.board[ypos].charAt(xpos -1) == 'p') {
+				} else if (Generel.board[ypos].charAt(xpos - 1) == 'p') {
 					fields[player.xpos - 1][player.ypos].setGraphic(new ImageView(image_peach));
 				}
 
@@ -197,24 +197,24 @@ public class Client extends Application {
 			}
 			;
 			if (player.direction.equals("left")) {
-				if (checkIfFieldIsPlayer(player.xpos + 1, player.ypos) && Generel.board[ypos].charAt(xpos +1) == ' ') {
+				if (checkIfFieldIsPlayer(player.xpos + 1, player.ypos) && Generel.board[ypos].charAt(xpos + 1) == ' ') {
 					fields[player.xpos + 1][player.ypos].setGraphic(new ImageView(image_floor));
-				} else if (Generel.board[ypos].charAt(xpos +1) == 'b') {
+				} else if (Generel.board[ypos].charAt(xpos + 1) == 'b') {
 					fields[player.xpos + 1][player.ypos].setGraphic(new ImageView(image_banana));
-				} else if (Generel.board[ypos].charAt(xpos +1) == 'p') {
+				} else if (Generel.board[ypos].charAt(xpos + 1) == 'p') {
 					fields[player.xpos + 1][player.ypos].setGraphic(new ImageView(image_peach));
 				}
-				
+
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_left));
 			}
 			;
 			if (player.direction.equals("up")) {
-				if (checkIfFieldIsPlayer(player.xpos, player.ypos + 1) && Generel.board[ypos +1].charAt(xpos) == ' ') {
+				if (checkIfFieldIsPlayer(player.xpos, player.ypos + 1) && Generel.board[ypos + 1].charAt(xpos) == ' ') {
 					fields[player.xpos][player.ypos + 1].setGraphic(new ImageView(image_floor));
-				}  else if (Generel.board[ypos + 1].charAt(xpos) == 'b') {
-					fields[player.xpos][player.ypos +1].setGraphic(new ImageView(image_banana));
-				} else if (Generel.board[ypos +1].charAt(xpos) == 'p') {
-					fields[player.xpos][player.ypos +1].setGraphic(new ImageView(image_peach));
+				} else if (Generel.board[ypos + 1].charAt(xpos) == 'b') {
+					fields[player.xpos][player.ypos + 1].setGraphic(new ImageView(image_banana));
+				} else if (Generel.board[ypos + 1].charAt(xpos) == 'p') {
+					fields[player.xpos][player.ypos + 1].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_up));
 			}
@@ -223,10 +223,10 @@ public class Client extends Application {
 				if (checkIfFieldIsPlayer(player.xpos, player.ypos - 1) && Generel.board[ypos - 1].charAt(xpos) == ' ') {
 					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_floor));
 
-				}  else if (Generel.board[ypos -1].charAt(xpos) == 'b') {
-					fields[player.xpos][player.ypos -1].setGraphic(new ImageView(image_banana));
-				} else if (Generel.board[ypos -1].charAt(xpos) == 'p') {
-					fields[player.xpos][player.ypos -1].setGraphic(new ImageView(image_peach));
+				} else if (Generel.board[ypos - 1].charAt(xpos) == 'b') {
+					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_banana));
+				} else if (Generel.board[ypos - 1].charAt(xpos) == 'p') {
+					fields[player.xpos][player.ypos - 1].setGraphic(new ImageView(image_peach));
 				}
 				fields[player.xpos][player.ypos].setGraphic(new ImageView(hero_down));
 			}
@@ -284,10 +284,47 @@ public class Client extends Application {
 		}
 	}
 
+	public static void reset() throws Exception {
+		Platform.runLater(() -> {
+			for (int j = 0; j < 20; j++) {
+				for (int i = 0; i < 20; i++) {
+					switch (Generel.board[j].charAt(i)) {
+					case 'w':
+						fields[i][j].setGraphic(new ImageView(image_wall));
+						break;
+					case ' ':
+						fields[i][j].setGraphic(new ImageView(image_floor));
+						break;
+					case 'b':
+						fields[i][j].setGraphic(new ImageView(image_banana));
+						break;
+					case 'p':
+						fields[i][j].setGraphic(new ImageView(image_peach));
+						break;
+					case '1':
+						fields[i][j].setGraphic(new ImageView(g_1));
+						break;
+					case '2':
+						fields[i][j].setGraphic(new ImageView(g_2));
+						break;
+					case '3':
+						fields[i][j].setGraphic(new ImageView(g_3));
+						break;
+					case '4':
+						fields[i][j].setGraphic(new ImageView(g_4));
+						break;
+					default:
+					}
+				}
+			}
+		});
+	}
+
 	// Sends a reset command to the server.
 	public void resetGame() {
 		try {
 			Client.outToServer.writeBytes("r" + '\n');
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

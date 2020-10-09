@@ -71,6 +71,17 @@ public class Server {
 
 	}
 
+	public static void sendReset() {
+		for (int i = 0; i < outPutStreamList.size(); i++) {
+			try {
+				outPutStreamList.get(i).writeBytes("reset" + "\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 // Send gameState i JSON Format til alle spillere. 
 	public static void sendGameState() {
 		// Pak gameState sammen

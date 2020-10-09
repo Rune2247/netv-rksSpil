@@ -42,9 +42,9 @@ public class ServerReciveThread extends Thread {
 			// Hvis "reset" genstart spillet
 			if (modifiedSentence.equals("r")) {
 				// Clear playerlisten i nu værende gameState
-				reset();
 
-				// SEND______________________________________
+				reset();
+				Server.sendReset();
 				Server.sendGameState();
 				// Break
 				return;

@@ -30,10 +30,9 @@ public class ClientRecieveThread extends Thread {
 	public void recieveData() {
 		try {
 			String recived = inFromServer.readLine();
-			if (recived.charAt(1) == 't') {
+			if (recived.equals("reset")) {
 				System.out.println(recived);
-				JSONObject jo = new JSONObject(recived);
-				Client.gameState.time = jo.getDouble("tid");
+				Client.reset();
 			} else {
 				Client.gameState = GameState.modtagGameState(recived);
 			}
