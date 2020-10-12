@@ -59,7 +59,7 @@ public class Client extends Application {
 			mazeLabel = new Text("FRUITLIST");
 			mazeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
-			scoreLabel = new Text("TID");
+			scoreLabel = new Text("Scoreboard:");
 			scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
 			scoreList = new TextArea();
@@ -252,9 +252,6 @@ public class Client extends Application {
 
 			scoreList.setText(b.toString());
 		});
-
-		// Updater tid
-		scoreLabel.setText("Time: " + gameState.time);
 	}
 
 	// Updates fruitlist
